@@ -9,19 +9,6 @@ const url = 'https://www.e-katalog.ru/list/189/pr-38912/';
 const token = '';
 const bot = new TelegramBot(token, {polling: true});
 
-async function main() {
-    var connection = await mysql.createConnection(config);
-    const [rows, fields] = await connection.execute("SELECT * FROM `cards`");
-    for (const card of rows) {
-        console.log(card);
-        const key = rows.indexOf(card);
-        var link = "https://www.e-katalog.ru" + card.link
-        bot.sendMessage('', "Появилась новая карта \nСсылка: "+ link + "\nЦена: " + card.price + "\nФильтр по цене : " + 60000);
-    }
-}
-
-main();
-
 rp(url)
     .then(async function (html) {
         var connection = await mysql.createConnection(config);
